@@ -1,0 +1,56 @@
+{
+  "name": "ethereum-delegated-tx-service",
+  "version": "1.0.0",
+  "description": "Universal back end for delegated transactions for Ethereum; pay fee in tokens instead of Ether",
+  "main": "src/index.js",
+  "module": "src/main.js",
+  "scripts": {
+    "test": "echo \"No tests specified\" && exit 0",
+    "start": "node -r esm src",
+    "dev": "nodemon -r esm src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZitRos/ethereum-delegated-tx-service.git"
+  },
+  "keywords": [
+    "ethereum",
+    "delegated",
+    "transactions",
+    "fee",
+    "in",
+    "tokens",
+    "feeless",
+    "crypto"
+  ],
+  "author": {
+    "name": "Nikita Savchenko",
+    "url": "https://nikita.tk"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ZitRos/ethereum-delegated-tx-service/issues"
+  },
+  "homepage": "https://github.com/ZitRos/ethereum-delegated-tx-service#readme",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "crypto-js": "^4.0.0",
+    "esm": "^3.2.25",
+    "ethers": "^4.0.33",
+    "express": "^4.17.1",
+    "express-async-handler": "^1.1.4",
+    "express-validator": "^6.6.1",
+    "fromentries": "^1.2.0",
+    "mongodb": "^3.3.0",
+    "mongoose": "^5.10.5",
+    "uuid": "^3.3.2",
+    "web3": "^1.3.0",
+    "web3-eth-accounts": "^1.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
