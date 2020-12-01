@@ -1,8 +1,8 @@
-import { delegateRequestStatuses } from "../constants";
+// import { delegateRequestStatuses } from "../constants";
 
-export const getStatusNameFromStatus = (status) => {
-  return Object.entries(delegateRequestStatuses).find(([, i]) => i === status)[0];
-}
+// export const getStatusNameFromStatus = (status) => {
+//   return Object.entries(delegateRequestStatuses).find(([, i]) => i === status)[0];
+// }
 
 export const getPrintableMongodbURL = (url) => url.replace(/(srv)?:\/\/([^:]+)\:([^@]+)\@/, "$1://***:***@");
 

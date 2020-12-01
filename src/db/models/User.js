@@ -13,6 +13,9 @@ let collectionPromise = getCollection("users");
   await collection.createIndex({
     name: 1,
     email:1,
+    // balance:1,
+    // rewardedBalance:1,
+    // activity:1,
     password: 1
   });
 })();
@@ -53,6 +56,12 @@ export async function addOne (q) {
 export async function findOne (q) {
   const collection = await collectionPromise;
   const result = await collection.findOne(q);
+  return result;
+}
+
+export async function findOneById (q) {
+  const collection = await collectionPromise;
+  const result = await collection.findOne({ _id: q });
   return result;
 }
 

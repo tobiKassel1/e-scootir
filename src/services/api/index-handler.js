@@ -1,6 +1,6 @@
 import asyncErrorHandler from "express-async-handler";
 import { ethereumGlobalConfig } from "../../../config";
-import { supportedContractsPromise } from "../../modules/metadata";
+// import { supportedContractsPromise } from "../../modules/metadata";
 import { getNetwork } from "ethers/utils/networks";
 
 export const handler = (app) => app.get("/", asyncErrorHandler(async (req, res) => {
