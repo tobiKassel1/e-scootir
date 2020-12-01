@@ -15,12 +15,12 @@ import * as buyMoreToekns from "./buyMoreToekns";
 
 const app = express();
 
-app.use(
-  "*",
-  cors({
-    origin: apiConfig.allowedOrigins || "*",
-  })
-);
+// app.use(
+//   "*",
+//   cors({
+//     origin: apiConfig.allowedOrigins || "*",
+//   })
+// );
 app.use(bodyParser.json());
 
 register.handler(app);
