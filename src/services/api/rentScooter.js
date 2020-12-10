@@ -1,6 +1,8 @@
 const bcrypt = require("bcryptjs");
 const Message = require("../../utils/Message");
 const { addOne, findOne, findOneAndUpdate } = require("../../db/models/User");
+const numberGenerator = require("number-generator");
+const number = require("generate-sms-verification-code");
 
 export const handler = (app) =>
   app.post("/rent", async (req, res, next) => {
@@ -19,6 +21,8 @@ export const handler = (app) =>
         return res.status(201).send("You don't have sufficiant tokens");
       }
       newTokens = newTokens - 5;
+      let rentedScootirs = user.rentedScootir;
+      rentedScootirs = rentedScootirs + 1;
 
       // console.log("TOKENS===",newTokens)
       //     const newUser ={
@@ -30,12 +34,41 @@ export const handler = (app) =>
       //     rewardedBalance:0,
       //     activity:[]
       //   };
+      let pakr = [
+        "avoid",
+        "zone1",
+        "zone2",
+        "zone3",
+        "zone4",
+        "zone7",
+        "zone8",
+        "zone9",
+        "zone7",
+        "zone8",
+        "zone9",
+      ];
+      let userActivity = user.activity;
+
+      userActivity.push({
+        time: new Date(),
+        scootirId: number(1, { type: "number" }),
+        parkingZone: pakr[number(1, { type: "number" })],
+      });
 
       let newuser = await findOneAndUpdate(
         { email: email },
         { $set: { tokens: newTokens } }
       );
-      res.status(200).send(new Message("Updated tokens"));
+      let new2 = await findOneAndUpdate(
+        { email: email },
+        { $set: { rentedScootir: rentedScootirs } }
+      );
+
+      let new23 = await findOneAndUpdate(
+        { email: email },
+        { $set: { activity: userActivity } }
+      );
+      res.status(200).send(new23);
     } catch (error) {
       console.log(error);
     }

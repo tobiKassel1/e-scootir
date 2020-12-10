@@ -21,7 +21,14 @@ export const handler = (app) =>
         balance: 50,
         tokens: 50,
         rewardedBalance: 0,
-        activity: [],
+        rentedScootir: 0,
+        activity: [
+          {
+            time: "",
+            scootirId: "",
+            parkingZone: "",
+          },
+        ],
       };
 
       await addOne(newUser);
