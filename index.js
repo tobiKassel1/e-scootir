@@ -48,7 +48,7 @@ app.use((err, _, res, next) => {
 export async function startApi() {
   console.info(`${new Date().toISOString()} | Starting API server...`);
   return new Promise((resolve) => {
-    app.listen(process.env.PORT || 5000, () => {
+    app.listen(apiConfig.port, apiConfig.host, () => {
       console.info(
         `${new Date().toISOString()} | API is up and running at http://${
           apiConfig.host
