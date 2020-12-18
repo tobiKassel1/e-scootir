@@ -6,7 +6,7 @@ var phoneToken = require("generate-sms-verification-code");
 export const handler = (app) =>
   app.post("/activity", async (req, res, next) => {
     const data = req.body;
-    const { email } = data;
+    const { email, noParking } = data;
     try {
       let user = await findOne({ email });
 
@@ -23,26 +23,28 @@ export const handler = (app) =>
       let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
       let year = date_ob.getFullYear();
 
-      // current hours
-      // let hours = date_ob.getHours();
-
-      // // current minutes
-      // let minutes = date_ob.getMinutes();
-
-      // // current seconds
-      // let seconds = date_ob.getSeconds();
-
-      // // prints date in YYYY-MM-DD format
-      // console.log(year + "-" + month + "-" + date);
-
-      // // prints date & time in YYYY-MM-DD HH:MM:SS format
-      // let fullTime = `${year} + "-" + ${month} + "-" + ${date} + " " + ${hours} + ":" + ${minutes} + ":" + ${seconds}`
-
       let fullDate = `${year}-${month}-${date}`;
+
+      if (noParking) {
+        history.push({
+          Scooter: "E-Scooter",
+          scooterId: id,
+          Date: fullDate,
+          rewarded: "No",
+        });
+
+        let newuser = await findOneAndUpdate(
+          { email: email },
+          { $set: { activity: history } }
+        );
+        return res.status(200).send(new Message("Updated tokens"));
+      }
+
       history.push({
         Scooter: "E-Scooter",
         scooterId: id,
         Date: fullDate,
+        rewarded: "Yes",
       });
 
       let newuser = await findOneAndUpdate(

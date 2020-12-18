@@ -20,7 +20,7 @@ export const handler = (app) =>
       if (newTokens == 0) {
         return res.status(201).send("You don't have sufficiant tokens");
       }
-      newTokens = newTokens - 5;
+      newTokens = newTokens - 3;
       let rentedScootirs = user.rentedScootir;
       rentedScootirs = rentedScootirs + 1;
 
@@ -34,26 +34,13 @@ export const handler = (app) =>
       //     rewardedBalance:0,
       //     activity:[]
       //   };
-      let pakr = [
-        "avoid",
-        "zone1",
-        "zone2",
-        "zone3",
-        "zone4",
-        "zone7",
-        "zone8",
-        "zone9",
-        "zone7",
-        "zone8",
-        "zone9",
-      ];
-      let userActivity = user.activity;
 
-      userActivity.push({
-        time: new Date(),
-        scootirId: number(1, { type: "number" }),
-        parkingZone: pakr[number(1, { type: "number" })],
-      });
+      // userActivity.push({
+      //   time: new Date(),
+      //   scootirId: number(1, { type: "number" }),
+      //   parkingZone: pakr[number(1, { type: "number" })],
+      //   reward: "Yes",
+      // });
 
       let newuser = await findOneAndUpdate(
         { email: email },
@@ -64,11 +51,11 @@ export const handler = (app) =>
         { $set: { rentedScootir: rentedScootirs } }
       );
 
-      let new23 = await findOneAndUpdate(
-        { email: email },
-        { $set: { activity: userActivity } }
-      );
-      res.status(200).send(new23);
+      // let new23 = await findOneAndUpdate(
+      //   { email: email },
+      //   { $set: { activity: userActivity } }
+      // );
+      res.status(200).send(new2);
     } catch (error) {
       console.log(error);
     }

@@ -1,17 +1,15 @@
 const bcrypt = require("bcryptjs");
 const Message = require("../../utils/Message");
 const { addOne, findOne, findOneAndUpdate } = require("../../db/models/User");
+const numberGenerator = require("number-generator");
+const number = require("generate-sms-verification-code");
 
 export const handler = (app) =>
   app.post("/reward", async (req, res, next) => {
     const data = req.body;
-    const { name, email, password } = data;
+    const { name, email, password, noReward } = data;
     try {
       let user = await findOne({ email });
-
-      //   if (user) {
-      //     return res.status(401).send(new Message("User already exists!"));
-      //   }
 
       let newBalance = user.rewardedBalance;
       let scoortir = user.rentedScootir;
@@ -20,19 +18,52 @@ export const handler = (app) =>
         return res.status(201).send("You are not renting any scootir");
       }
       scoortir = scoortir - 1;
-      newBalance = newBalance + 5;
+      newBalance = newBalance + 1;
 
-      // console.log("TOKENS===",newTokens)
+      let pakr = [
+        "Parking Zone",
+        "Parking Zone",
+        "Parking Zone",
+        "Parking Zone",
+        "Parking Zone",
+        "Parking Zone",
+        "Parking Zone",
+        "Parking Zone",
+        "Parking Zone",
+        "Parking Zone",
+        "Parking Zone",
+      ];
+      let userActivity = user.activity;
 
-      //     const newUser ={
-      //     name,
-      //     email,
-      //     password,
-      //     balance:50,
-      //     tokens: tokens,
-      //     rewardedBalance:0,
-      //     activity:[]
-      //   };
+      if (noReward) {
+        userActivity.push({
+          time: new Date(),
+          scootirId: number(1, { type: "number" }),
+          parkingZone: "No Parking Zone",
+          reward: "No",
+        });
+
+        let newuser = await findOneAndUpdate(
+          { email: email },
+          { $set: { rewardedBalance: newBalance - 1 } }
+        );
+        let newnew2user = await findOneAndUpdate(
+          { email: email },
+          { $set: { rentedScootir: scoortir } }
+        );
+
+        let new23 = await findOneAndUpdate(
+          { email: email },
+          { $set: { activity: userActivity } }
+        );
+        return res.status(200).send(new23);
+      }
+      userActivity.push({
+        time: new Date(),
+        scootirId: number(1, { type: "number" }),
+        parkingZone: pakr[number(1, { type: "number" })],
+        reward: "Yes",
+      });
 
       let newuser = await findOneAndUpdate(
         { email: email },
@@ -41,6 +72,10 @@ export const handler = (app) =>
       let newnew2user = await findOneAndUpdate(
         { email: email },
         { $set: { rentedScootir: scoortir } }
+      );
+      let new23 = await findOneAndUpdate(
+        { email: email },
+        { $set: { activity: userActivity } }
       );
       res.status(200).send(new Message("Updated tokens"));
     } catch (error) {
