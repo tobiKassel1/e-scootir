@@ -16,7 +16,7 @@ export const mongodbConfig = {
   // url: process.env.MONGODB_URL || "mongodb+srv://scootria-user:123456sctr@cluster0.h1a4z.mongodb.net/scootria?retryWrites=true&w=majority",
   url:
     process.env.MONGODB_URL ||
-    "mongodb+srv://scootria-user:123456sctr@cluster0.iouhh.mongodb.net/<dbname>?retryWrites=true&w=majority",
+    "mongodb+srv://tobi:scootir1337@cluster0.xozr2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
   // url: process.env.MONGODB_URL || "mongodb+srv://muhtashim_dev:muhtashimAli123@cluster0.frvr1.mongodb.net/ETHEREUM-DELEGATED-TX-ROPSTEN?retryWrites=true&w=majority",
   dbName: process.env.MONGODB_DB_NAME || `scootir`,
 };
